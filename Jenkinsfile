@@ -15,19 +15,24 @@ pipeline {
                 bat 'mvn --batch-mode clean'
             }
         }
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests package'
-            }
-        }
+		stage('Build') {
+			steps {
+				bat 'mvn --batch-mode compile'
+			}
+		}
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn --batch-mode test'
             }
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+            }
+        }
+        stage('Package') {
+            steps {
+                bat 'mvn --batch-mode -B -DskipTests package'
             }
         }
     }
