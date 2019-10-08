@@ -42,8 +42,6 @@ pipeline {
         stage('Deploy') {
             steps {
             	echo $NAME
-       			pom = readMavenPom file: 'pom.xml'
-				echo $pom
                 bat 'java -jar target/${NAME}-${VERSION}.jar'
             }
         }
