@@ -39,5 +39,10 @@ pipeline {
                 bat 'mvn --batch-mode -B -DskipTests package'
             }
         }
+        stage('Deploy') {
+            steps {
+                java -jar 'target/${NAME}-${VERSION}.jar'
+            }
+        }
     }
 }
