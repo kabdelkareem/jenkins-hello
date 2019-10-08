@@ -43,7 +43,8 @@ pipeline {
             steps {
 		    	echo "${NAME}"
 		    	echo "${VERSION}"
-                bat 'java -jar target/${env.NAME}-${env.VERSION}.jar'
+		    	echo "${env.VERSION}"
+                bat """java -jar target/${NAME}-${VERSION}.jar"""
             }
         }
     }
