@@ -41,7 +41,6 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-            	echo ${NAME}
             	echo $NAME
        			pom = readMavenPom file: 'pom.xml'
 				echo $pom
