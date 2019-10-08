@@ -35,5 +35,10 @@ pipeline {
                 bat 'mvn --batch-mode -B -DskipTests package'
             }
         }
+        stage('Deploy') {
+            steps {
+                bat './jenkins/scripts/deliver.sh'
+            }
+        }
     }
 }
