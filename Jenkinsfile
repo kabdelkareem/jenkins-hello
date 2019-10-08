@@ -4,10 +4,20 @@ pipeline {
     	maven 'Maven 3.6'
     	jdk 'JDK1.8'
 	}
+	options {
+		buildDiscarder(logRotator(numToKeepStr: '4'))
+		skipStagesAfterUnstable()
+		disableConcurrentBuilds()
+	}
     stages {
+    	stage('Clean') {
+            steps {
+                bat 'mvn --batch-mode clean'
+            }
+        }
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -B -DskipTests package'
             }
         }
         stage('Test') {
