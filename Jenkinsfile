@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat 'mvn --batch-mode install:install'
-                java -jar target/${NAME}-${VERSION}.jar
+                java -jar 'target/${NAME}-${VERSION}.jar'
             }
         }
     }
