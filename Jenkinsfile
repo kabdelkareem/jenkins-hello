@@ -41,9 +41,6 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-		    	echo "${NAME}"
-		    	echo "${VERSION}"
-		    	echo "${env.VERSION}"
                 bat """java -jar target/${NAME}-${VERSION}.jar"""
             }
         }
