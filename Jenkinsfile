@@ -9,6 +9,10 @@ pipeline {
 		skipStagesAfterUnstable()
 		disableConcurrentBuilds()
 	}
+	environment {
+		NAME = readMavenPom().getArtifactId()
+		VERSION = readMavenPom().getVersion()
+	}
     stages {
     	stage('Clean') {
             steps {
@@ -37,7 +41,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                bat 'jenkins/scripts/deliver.bat'
+                bat 'mvn --batch-mode install:install'
+                java -jar target/${NAME}-${VERSION}.jar
             }
         }
     }
