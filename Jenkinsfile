@@ -44,5 +44,19 @@ pipeline {
                 bat """java -jar target/${NAME}-${VERSION}.jar"""
             }
         }
+        stage('Publish') {
+        	input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                    string(name: 'MACHINE', defaultValue: 'Mr Bot', description: 'Who bot should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
+            }
+        }
     }
 }
