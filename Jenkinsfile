@@ -39,23 +39,43 @@ pipeline {
                 bat 'mvn --batch-mode -B -DskipTests package'
             }
         }
-        stage('Deploy') {
+        stage('Install') {
             steps {
                 bat """java -jar target/${NAME}-${VERSION}.jar"""
             }
         }
         stage('Publish') {
         	input {
-                message "Should we continue?"
+                message "Should we continue to deploy?"
                 ok "Yes, we should."
-                submitter "alice,bob"
                 parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                    string(name: 'MACHINE', defaultValue: 'Mr Bot', description: 'Who bot should I say hello to?')
+                    booleanParam(name: 'DEPLOY_TO', defaultValue: false, description: 'Are you sure?')
                 }
             }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
+            when {
+                beforeInput false
+            	allOf {
+            		branch 'master'; environment name: 'DEPLOY_TO', value: true; tag pattern: "release-\\d+", comparator: "REGEXP"
+            	}
+            }
+            stages {
+            	stage('Integration Test') {
+            		echo "Integration tests ran successfully"
+            	}
+            	stage('Push') {
+	        		parallel {
+	                    stage('QA') {
+	                        steps {
+	                            echo "Pushed to QA environment"
+	                        }
+	                    }
+	                    stage('Production') {
+	                        steps {
+	                            echo "Pushed to Production environment"
+	                        }
+	                    }
+	                }
+            	}
             }
         }
     }
