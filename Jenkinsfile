@@ -55,7 +55,7 @@ pipeline {
             when {
                 beforeInput false
             	allOf {
-            		branch 'master'; environment name: 'DEPLOY_TO', value: true; tag pattern: "release-\\d+", comparator: "REGEXP"
+            		branch 'master'; environment name: 'DEPLOY_TO', value: 'true'; tag pattern: "release-\\d+", comparator: "REGEXP"
             	}
             }
             stages {
