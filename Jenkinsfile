@@ -60,7 +60,9 @@ pipeline {
             }
             stages {
             	stage('Integration Test') {
-            		echo "Integration tests ran successfully"
+                    steps {
+            			echo "Integration tests ran successfully"
+            		}
             	}
             	stage('Push') {
 	        		parallel {
