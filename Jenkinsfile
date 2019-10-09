@@ -47,15 +47,14 @@ pipeline {
         stage('Publish') {
         	input {
                 message "Should we continue to deploy?"
-                ok "Yes, we should."
                 parameters {
-                    booleanParam(name: 'DEPLOY_TO', defaultValue: false, description: 'Are you sure?')
+                    booleanParam(name: 'DEPLOY_TO', defaultValue: false, description: '')
                 }
             }
             when {
                 beforeInput false
             	allOf {
-            		branch 'master'; environment name: 'DEPLOY_TO', value: 'true'
+            		branch 'master'; expression { params.DEPLOY_TO == true }
             	}
             }
             stages {
