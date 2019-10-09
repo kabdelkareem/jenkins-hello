@@ -56,14 +56,14 @@ pipeline {
             	}
             	stage('Push') {
 	        		parallel {
-	                    stage('QA') {
+	                    stage('ClientOne') {
 	                        steps {
-	                            echo "Pushed to QA environment"
+	                            echo "Pushed to ClientOne environment"
 	                        }
 	                    }
-	                    stage('Production') {
+	                    stage('ClientTwo') {
 	                        steps {
-	                            echo "Pushed to Production environment"
+	                            echo "Pushed to ClientTwo environment"
 	                        }
 	                    }
 	                }
