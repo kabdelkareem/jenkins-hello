@@ -45,16 +45,6 @@ pipeline {
             }
         }
         stage('Publish') {
-        	input {
-                message "Should we continue to deploy?"
-                parameters {
-                    booleanParam(name: 'DEPLOY_TO', defaultValue: true, description: '')
-                }
-            }
-            when {
-                beforeInput false
-            	expression { params.DEPLOY_TO == true }
-            }
             stages {
             	stage('Integration Test') {
                     steps {
