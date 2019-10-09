@@ -46,6 +46,16 @@ pipeline {
         }
         stage('Publish') {
             stages {
+	        	input {
+	                message "Should we continue to deploy?"
+	                parameters {
+	                    booleanParam(name: 'DEPLOY', defaultValue: true, description: '')
+	                }
+	            }
+	            when {
+	                beforeInput false
+	            	expression { params.DEPLOY }
+	            }
             	stage('Integration Test') {
                     steps {
             			echo "Integration tests ran successfully"
