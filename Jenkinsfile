@@ -48,14 +48,12 @@ pipeline {
         	input {
                 message "Should we continue to deploy?"
                 parameters {
-                    booleanParam(name: 'DEPLOY_TO', defaultValue: false, description: '')
+                    booleanParam(name: 'DEPLOY_TO', defaultValue: true, description: '')
                 }
             }
             when {
                 beforeInput false
-            	allOf {
-            		branch 'master'; expression { params.DEPLOY_TO == true }
-            	}
+            	expression { params.DEPLOY_TO == true }
             }
             stages {
             	stage('Integration Test') {
