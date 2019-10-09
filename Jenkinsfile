@@ -45,6 +45,9 @@ pipeline {
             }
         }
         stage('Publish') {
+            when {
+                branch 'master' 
+            }
         	input {
                 message "Should we continue to deploy?"
             }
