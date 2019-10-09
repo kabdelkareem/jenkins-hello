@@ -58,12 +58,12 @@ pipeline {
 	        		parallel {
 	                    stage('ClientOne') {
 	                        steps {
-	                            echo "Pushed to ClientOne environment"
+	                            echo "Pushed to Client One environment"
 	                        }
 	                    }
 	                    stage('ClientTwo') {
 	                        steps {
-	                            echo "Pushed to ClientTwo environment"
+	                            echo "Pushed to Client Two environment"
 	                        }
 	                    }
 	                }
