@@ -17,7 +17,7 @@ pipeline {
     	stage('Start') {
             steps {
 				slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-				slackSend( channel: '#general', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", teamDomain: 'listinapp', tokenCredentialId: 'nVIJedP4dlW0lnGNFqsdFka7', color: 'danger', botUser: false)
+				slackSend( channel: '#general', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", teamDomain: 'listinapp', tokenCredentialId: 'slack2', color: 'danger', botUser: false)
             }
         }
     	stage('Clean') {
